@@ -1,19 +1,29 @@
 const request = require('request');
 const config = require('../config.js');
 
-let getReposByUsername = (/* TODO */) => {
-  // TODO - Use the request module to request repos for a specific
-  // user from the github API
+let getReposByUsername = (username, callback) => {
 
-  // The options object has been provided to help you out, 
-  // but you'll have to fill in the URL
   let options = {
-    url: 'FILL ME IN',
+    url: `https://api.github.com/users/${username}/repos`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `token ${config.TOKEN}`
     }
   };
+
+  request.get(options, (err, res, body) => {
+    const parsedBody = JSON.parse(body);
+    if (parsedBody.message === 'Not Found') {
+      console.log('The username does not exist.');
+    } else {
+      body = parsedBody.map((repo) => {
+        const {owner: {login: user}, name, html_url, description, stargazers_count, forks} = repo;
+        const userObj = {user, name, html_url, description, stargazers_count, forks};
+        return userObj;
+      });
+    }
+    callback(err, body);
+  });
 
 }
 

@@ -8,9 +8,8 @@ db.once('open', function() {
 });
 
 let repoSchema = mongoose.Schema({
-  id: Number,
+  user: String,
   name: String,
-  full_name: String,
   html_url: String,
   description: String,
   stargazers_count: String,
