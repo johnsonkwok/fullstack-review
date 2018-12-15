@@ -17,7 +17,7 @@ app.post('/repos', function (req, res) {
       res.sendStatus(501);
     } else {
       save(repos);
-      console.log('The results from the github API:', repos);
+      // console.log('The results from the github API:', repos);
       res.sendStatus(201);
     }
   });
@@ -36,6 +36,13 @@ app.get('/repos', function (req, res) {
     }).catch((err) => {
       console.error(err);
       res.sendStatus(501);
+    });
+});
+
+app.get('/count', (req, res) => {
+  return Repo.count()
+    .then((count) => {
+      res.send(JSON.stringify(count));
     });
 });
 

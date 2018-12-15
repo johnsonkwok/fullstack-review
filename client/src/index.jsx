@@ -10,32 +10,49 @@ class App extends React.Component {
     this.state = { 
       repos: []
     }
+    this.updateHomepage = this.updateHomepage.bind(this);
   }
 
-  componentDidMount() {
+  updateHomepage() {
     return fetch('/repos')
       .then((results) => {
         return results.json();
       }).then((repos) => {
         this.setState({repos});
+      }).then(() => {
+        return fetch('/count');
+      }).then((result) => {
+        return result.json();
+      }).then((count) => {
+        this.setState({count});
       });
+  }
+
+  componentDidMount() {
+    this.updateHomepage();
   }
 
   search(term) {
     console.log(`${term} was searched.`);
+    const updateHome = this.updateHomepage;
     $.ajax({
       url: '/repos',
       type: 'POST',
       data: {term},
       error: () => {console.log('Search POST request failed.')},
-      success: () => {console.log('Search POST request successful.')}
+      success: () => {
+        console.log('Search POST request successful.');
+      }
+    }).done(() => {
+      this.updateHomepage();
     });
+    $('#search').val('');
   }
 
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
+      <RepoList count={this.state.count} repos={this.state.repos}/>
       <Search onSearch={this.search.bind(this)}/>
     </div>)
   }

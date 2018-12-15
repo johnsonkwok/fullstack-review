@@ -3,7 +3,7 @@ const config = require('../config.js');
 
 let getReposByUsername = (username, callback) => {
   let options = {
-    url: `https://api.github.com/users/${username}/repos`,
+    url: `https://api.github.com/users/${username}/repos?per_page=100`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `token ${config.TOKEN}`
@@ -11,6 +11,7 @@ let getReposByUsername = (username, callback) => {
   };
 
   request.get(options, (err, res, body) => {
+    // console.log(JSON.parse(res.body).length);   // Number of search results returned from Github API
     const parsedBody = JSON.parse(body);
     if (parsedBody.message === 'Not Found') {
       body = null;

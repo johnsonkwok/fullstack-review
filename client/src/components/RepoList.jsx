@@ -1,9 +1,9 @@
 import React from 'react';
 import RepoListItem from './RepoListItem.jsx';
 
-const RepoList = ({repos}) => (
+const RepoList = ({repos, count}) => (
   <div>
-    <h3> Repo List </h3>
+    <h3> Top 25 Forked Repos in Database </h3>
     <table>
       <thead>
         <tr>
@@ -21,7 +21,7 @@ const RepoList = ({repos}) => (
     </table>
     <br /><br />
     <div>
-      There are {repos.length} repos.
+      There are {count} repos in the database.
     </div>
   </div>
 )
