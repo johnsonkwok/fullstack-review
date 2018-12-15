@@ -17,7 +17,7 @@ app.post('/repos', function (req, res) {
       res.sendStatus(501);
     } else {
       save(repos);
-      // console.log('The results from the github API:', repos);
+      console.log('The results from the github API:', repos);
       res.sendStatus(201);
     }
   });
