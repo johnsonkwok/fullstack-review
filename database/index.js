@@ -36,3 +36,4 @@ let save = (repos) => {
 }
 
 module.exports.save = save;
+module.exports.Repo = Repo;
