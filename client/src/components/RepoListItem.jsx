@@ -6,15 +6,16 @@ const RepoListItem = ({repo}) => (
       {repo.user}
     </td>
     <td>
+      <a href={`${repo.html_url}`}>
       {repo.name}
-    </td>
-    <td>
-      {repo.html_url}
+      </a>
     </td>
     <td>
       {repo.forks}
     </td>
-  
+    <td>
+      {repo.stargazers_count}
+    </td>
   </tr>
 );
 

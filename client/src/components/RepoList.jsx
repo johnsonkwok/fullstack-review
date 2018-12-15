@@ -9,8 +9,8 @@ const RepoList = ({repos}) => (
         <tr>
           <th>User</th>
           <th>Name</th>
-          <th>URL</th>
           <th>Forks</th>
+          <th>Stars</th>
         </tr>
       </thead>
       <tbody>
