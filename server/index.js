@@ -32,8 +32,11 @@ app.get('/repos', function (req, res) {
       const docs = repos.map(model => model._doc);
       return docs;
     }).then((docs) => {
-      res.json(docs);
-    })
+      res.send(docs);
+    }).catch((err) => {
+      console.error(err);
+      res.sendStatus(501);
+    });
 });
 
 let port = 1128;

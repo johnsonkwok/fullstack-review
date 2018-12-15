@@ -13,6 +13,15 @@ class App extends React.Component {
 
   }
 
+  componentDidMount() {
+    return fetch('/repos')
+      .then((results) => {
+        return results.json();
+      }).then((repos) => {
+        this.setState({repos});
+      });
+  }
+
   search(term) {
     console.log(`${term} was searched.`);
     $.ajax({
