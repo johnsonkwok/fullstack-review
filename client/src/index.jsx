@@ -18,9 +18,8 @@ class App extends React.Component {
     $.ajax({
       url: '/repos',
       type: 'POST',
-      // contentType: 'application/json',
-      data: term,
-      error: (err) => {console.log('Search POST request failed.')},
+      data: {term},
+      error: () => {console.log('Search POST request failed.')},
       success: () => {console.log('Search POST request successful.')}
     });
   }

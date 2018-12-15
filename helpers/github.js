@@ -14,6 +14,7 @@ let getReposByUsername = (username, callback) => {
   request.get(options, (err, res, body) => {
     const parsedBody = JSON.parse(body);
     if (parsedBody.message === 'Not Found') {
+      body = null;
       console.log('The username does not exist.');
     } else {
       body = parsedBody.map((repo) => {
