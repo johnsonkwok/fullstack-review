@@ -18,7 +18,7 @@ class App extends React.Component {
       .then((results) => {
         return results.json();
       }).then((repos) => {
-        this.setState({repos});
+        return this.setState({repos});
       }).then(() => {
         return fetch('/count');
       }).then((result) => {

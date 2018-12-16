@@ -10,7 +10,7 @@ db.once('open', function() {
 let repoSchema = mongoose.Schema({
   user: String,
   name: {type: String, unique: true},
-  html_url: String,
+  html_url: {type: String},
   description: String,
   stargazers_count: String,
   forks: Number
@@ -18,14 +18,13 @@ let repoSchema = mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (repos) => {
+let save = (repos, callback) => {
   if (repos === null) {
     return;
   } else if (Array.isArray(repos)) {
-    Repo.init()
-      .then(() => {
-        Repo.insertMany(repos);
-      });
+    // may needa use Model.findOneAndUpdate method and loop thru docs
+    Repo.insertMany(repos)
+      .then(callback);
   } else {
     let newRepo = new Repo(repos);
     newRepo.save(function(err, newRepo) {
